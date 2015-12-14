@@ -1,0 +1,21 @@
+import challonge
+import time
+
+challonge.set_credentials("eliasingea", "LTQX768N8omoYw2aaRYTn6EyP6yVztkaRjd7TBkQ")
+
+tournament = challonge.tournaments.show("qt98yh8i")
+games = challonge.matches.index(tournament["id"])
+
+print tournament["id"]
+file = open("streamedGames.txt", "w")
+streamedGames = ['B', 'D', 'O', 'G', 'T', 'K', 'W', 'M']
+for s in streamedGames:
+    for g in games:
+        if(g["identifier"] == s):
+            if(g["state"] == "open"):
+                file.write(str(g["player1-id"]))
+                file.write("\n")
+                file.write(str(g["player2-id"]))
+                file.write("\n")
+
+file.close()
